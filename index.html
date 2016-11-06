@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="shoppingList">
+<head>
+  <meta charset="UTF-8">
+  <title>module2-solution</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+  <section class="container">
+  <div class="row">
+    <header>
+      <h1>Module2 solution</h1>
+    </header>
+    <!-- To Buy List -->
+    <div class="col-md-6" ng-controller="ShoppingListController as shoppingListCtrl">
+      <header>
+        <h2>To buy: <small>{{ shoppingListCtrl.hello }}</small> <span class="label label-default">{{shoppingListCtrl.numOfBoughtItems}}</span></h2>
+      </header>
+      <div ng-if="shoppingListCtrl.showMessage" class="alert alert-success" role="alert">Everything bought!!!</div>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="item in shoppingListCtrl.items" ng-if="!item.bought">
+          Buy {{ item.quantity }} {{ item.name }} <button class="btn btn-default" ng-click="shoppingListCtrl.alreadyBought($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button>
+        </li>
+      </ul>
+      <ul>
+        <!-- <li ng-repeat="item in shoppingListCtrl.items" ng-if="!item.bought"></li> -->
+      </ul>
+    </div> <!-- /. End of To Buy -->
+    <div class="col-md-6" ng-controller="AlreadyBoughtController as alreadyBoughtCtrl">
+      <header>
+        <h2>Already Bought: <small>{{ alreadyBoughtCtrl.hello }}</small> <span class="label label-default">{{alreadyBoughtCtrl.numOfBoughtItems}}</span></h2>
+      </header>
+      <div ng-show="alreadyBoughtCtrl.numOfBoughtItems == 0" class="alert alert-danger" role="alert">Nothing bought yet!!!</div>
+      <ul>
+        <li ng-repeat="item in alreadyBoughtCtrl.items" ng-if="item.bought">Bought {{ item.quantity }} {{ item.name }}</li>
+      </ul>
+    </div>  <!-- /. End of already bought -->
+  </div>   <!-- /. End of row -->
+  </section>
+
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/shoppingList.controller.js"></script>
+  <script src="js/alreadyBought.controller.js"></script>
+  <script src="js/shoppingListService.js"></script>
+</body>
+</html>
