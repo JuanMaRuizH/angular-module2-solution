@@ -6,7 +6,8 @@
 
     function ShoppingListService() {
       var service = this;
-      service.numOfBoughtItems = [];
+      service.numOfBoughtItems = 0;
+      service.boughtItems = [];
 
       var items = [
         {
@@ -37,6 +38,7 @@
 
       service.setItemAsBought = function(index) {
         items[index].bought = true;
+        return service.getNumOfBoughtItems();
       }
 
       service.getTotalNumOfItems = function() {
@@ -51,6 +53,16 @@
           }
         });
         return service.numOfBoughtItems;
+      }
+
+      service.getBoughtItems = function() {
+        service.boughtItems = [];
+        angular.forEach(items, function(item, key) {
+          if(item.bought === true){
+            service.boughtItems.push(item);
+          }
+        });
+        return service.boughtItems;
       }
 
     };

@@ -9,14 +9,15 @@
     function AlreadyBoughtController(ShoppingListService, $scope) {
       var alreadyBought = this;
       alreadyBought.hello = "AlreadyBoughtController";
-      alreadyBought.numOfBoughtItems = ShoppingListService.getNumOfBoughtItems();
-      alreadyBought.showMessage = ShoppingListService.getNumOfBoughtItems() === 0 ? true : false;
-
+      alreadyBought.bougthItems = ShoppingListService.getBoughtItems();
+      alreadyBought.numOfBoughtItems;
+      alreadyBought.showMessage = alreadyBought.numOfBoughtItems === 0 ? true : false;
       alreadyBought.items = ShoppingListService.getItems();
 
-      $scope.$watch('alreadyBought.numOfBoughtItems', function(current, previous) {
-        console.log("Current: " + current + "\nPrevious: " + previous);
+      $scope.$watch(function() {
+        return ShoppingListService.getNumOfBoughtItems();
+      }, function(current, previous) {
+        return alreadyBought.numOfBoughtItems = current;
       });
-
     }
 })();
